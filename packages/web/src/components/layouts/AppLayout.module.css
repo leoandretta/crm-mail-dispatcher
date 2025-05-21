@@ -1,0 +1,25 @@
+.wrapper
+{
+    background-color: var(--mantine-color-lightblue-0);
+    width: 100vw;
+    height: 100vh;
+}
+
+.header_wrapper 
+{
+    background-color: var(--mantine-color-lightblue-0);
+    height: 70px;
+    border-bottom: 1px solid var(--mantine-color-lightblue-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0px 20px;
+}
+
+.content_wrapper
+{
+    width: 100vw;
+    height: calc(100vh - 70px);
+    padding: 20px;
+}

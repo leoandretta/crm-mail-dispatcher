@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "baseUrl": ".",
+    "paths": {
+      "@crm-mail-dispatcher/shared/*": ["../shared/*"],
+      "@/*": ["./src/*"],
+      "@/database/repositories": ["./src/database/schemas/repositories.ts"],
+      "@/database/models": ["./src/database/schemas/models.ts"],
+      "@/database": ["./src/database/index.ts"],
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "useUnknownInCatchVariables": false,
+    "skipLibCheck": true
+  },
+  "extends": "../../tsconfig.json",
+}

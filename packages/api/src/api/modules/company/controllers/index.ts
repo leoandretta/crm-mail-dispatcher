@@ -1,0 +1,1 @@
+export { default as CompanyControllers } from "./company"

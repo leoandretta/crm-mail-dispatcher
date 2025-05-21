@@ -1,0 +1,9 @@
+.rich_text_area {
+    cursor: text;
+}
+
+
+.greetings:hover, .signature:hover {
+    background-color: #80808020;
+    color: #4a4a4a;
+}

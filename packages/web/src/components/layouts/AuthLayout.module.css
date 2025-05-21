@@ -1,0 +1,21 @@
+
+
+.wrapper
+{
+    background-color: var(--mantine-color-lightblue-0);
+    /* padding-top: 60px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
