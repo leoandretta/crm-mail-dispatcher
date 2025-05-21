@@ -17,7 +17,7 @@ const AppLayout = ({ actions, children}: AppLayoutProps) => {
         <div className={classes.wrapper}>
             <header>
                 <div className={classes.header_wrapper}>
-                    <img src={Logo} height="70px" width="180px" />
+                    <img src={Logo} height="70px"/>
                     {
                         actions && actions.map(action => {
                             const ActionButton = () => (
