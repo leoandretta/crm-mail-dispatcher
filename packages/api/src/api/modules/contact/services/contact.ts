@@ -135,12 +135,22 @@ class ContactServices implements ICRUDService<
     }
 
     async delete(id: string | number, options?: DestroyOptions<ContactAttributes> | undefined): Promise<number> {
-        if(!id) throw new DatabaseError(`ID não fornecido!`);
+        const transaction = await AppDataSource.transaction()
+        try {
+            if(!id) throw new DatabaseError(`ID não fornecido!`);
 
-        return await this.defaultRepo.delete({
-            ...options,
-            where: { id }
-        })
+            const [updateCount] = await this.defaultRepo.update({
+                active: false
+            }, {
+                where: { id },
+                transaction
+            })
+            await transaction.commit();
+            return updateCount
+        } catch (error) {
+            await transaction.rollback();
+            throw error;
+        }
     }
 
 }

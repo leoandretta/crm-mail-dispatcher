@@ -71,9 +71,9 @@ class CompanyContactControllers implements ICRUDController
 
     async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const data = await ContactServices.delete(req.params.id);
+            await ContactServices.delete(req.params.id);
 
-            res.status(200).json({ success: true, data, message: "Contato deletado com sucesso" })
+            res.status(200).json({ success: true, message: "Contato deletado com sucesso" })
         } catch (error) {
             next(error);
         }

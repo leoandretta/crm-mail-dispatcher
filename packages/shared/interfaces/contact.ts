@@ -9,13 +9,16 @@ export interface ContactAttributes extends EntityAttributes
     phone: string;
 
     companyId: number;
+    active: boolean;
     
     company?: CompanyAttributes
 }
 
-export interface ContactCreationAttributes extends EntityCreationAttributes<ContactAttributes, "company" | "companyId" > 
+export interface ContactCreationAttributes extends EntityCreationAttributes<ContactAttributes, "company" | "companyId" | "active" > 
 {
     companyId?: number;
+    active?: boolean;
+    
     company?: CompanyCreationAttributes;
 }
 
