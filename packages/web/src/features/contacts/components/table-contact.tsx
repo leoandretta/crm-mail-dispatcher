@@ -11,23 +11,25 @@ import {
         Selection,
         SearchPanel,
 } from "devextreme-react/data-grid"
-import { ActionIcon, Button, Group, Text, Tooltip } from "@mantine/core";
+import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
 import TableSearchBar from "@/components/ui/dx/table-search-bar";
 import TableReloadButton from "@/components/ui/dx/table-reload-button";
 import CreateContactModal from "./create-contact";
 import SendEmailModal from "@/features/email/components/send-email";
-import './table-contact.css'
 import { contactsColumns } from "@/config/columns";
 import UpdateContactModal from "./update-contact";
 import Icon from "@mdi/react";
-import { mdiPencil, mdiPlus } from "@mdi/js";
+import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
 import { getContacts } from "../api/get-contacts";
+import './table-contact.css'
+import DeleteContactModal from "./delete-contact";
 
 const TableContact = () => {
     const dataGridRef = useRef<DataGridRef>(null);
 
     const [isModalCreateOpen, setModalCreateOpen] = useState(false);
     const [isModalUpdateOpen, setModalUpdateOpen] = useState(false);
+    const [isModalDeleteOpen, setModalDeleteOpen] = useState(false);
     const [selectedId, setSelectedId] = useState<number | null>(null)
     
     const [current_page, setPage] = useState(0);
@@ -44,15 +46,22 @@ const TableContact = () => {
         setSelectedId(id);
     }
     
+    const handleDelete = (id: number) => {
+        setSelectedId(id);
+        setModalDeleteOpen(true);
+    }
+    
     const onModalSuccess = () => {
         setModalCreateOpen(false);
         setModalUpdateOpen(false);
+        setModalDeleteOpen(false);
         dataGridRef.current?.instance.state(null);
     }
 
     const onModalClose = () => {
-        setModalUpdateOpen(false)
-        setModalCreateOpen(false)
+        setModalCreateOpen(false);
+        setModalUpdateOpen(false);
+        setModalDeleteOpen(false);
     }
 
     const CreateContactButton = () => (
@@ -74,24 +83,19 @@ const TableContact = () => {
 
     const actionCellRender = useCallback((data: ColumnCellTemplateData) => {
         return (
-            <Tooltip key="update-btn" label="Editar" position="bottom">
-                <ActionIcon variant="light" radius="xl" onClick={() => handleUpdate(data.data.id)} >
-                    <Icon path={mdiPencil} size="20" />
-                </ActionIcon>
-            </Tooltip>
+            <Group >
+                <Tooltip key="delete-btn" label="Deletar contato" position="bottom">
+                    <ActionIcon variant="light" color="red" radius="xl" onClick={() => handleDelete(data.data.id)} >
+                        <Icon path={mdiDelete} size="20" />
+                    </ActionIcon>
+                </Tooltip>
+                <Tooltip key="update-btn" label="Editar" position="bottom">
+                    <ActionIcon variant="light" radius="xl" onClick={() => handleUpdate(data.data.id)} >
+                        <Icon path={mdiPencil} size="20" />
+                    </ActionIcon>
+                </Tooltip>
+            </Group>
         )
-    }, [])
-
-    const phoneCellRender = useCallback(({ data }: ColumnCellTemplateData ) => {
-        const default_phone = data.phones.find((e: any) => e.primary == true)
-        if(!default_phone) 
-        {
-            return <Text>Não informado</Text>
-        }
-        else 
-        {
-            return <Text>{ default_phone.phone }</Text>
-        }
     }, [])
 
     const dataSource = useMemo<CustomStore>(() => {
@@ -115,7 +119,6 @@ const TableContact = () => {
             }
         })
     }, [columns]);
-
     
     return (
         <>
@@ -135,6 +138,7 @@ const TableContact = () => {
                 loadPanel={{ enabled: true, shading: false, text: "Carregando contatos..."}}
                 scrolling={{ mode: "standard", rowRenderingMode: "standard", renderAsync: true, preloadEnabled: true }}
                 pager={{ visible: true, displayMode: "full", showPageSizeSelector: true, showNavigationButtons: true, allowedPageSizes: [10, 25, 50]}}
+                filterValue={["active", "=", true]}
             >
                 <SearchPanel
                     visible
@@ -175,6 +179,8 @@ const TableContact = () => {
                             visible={column.visible}
                             width={column.width}
                             headerFilter={column.headerFilter}
+                            filterValue={column.filterValue}
+                            filterValues={column.filterValues}
                         />
                     ))
                 }
@@ -204,12 +210,11 @@ const TableContact = () => {
                 <Template name="title-header" render={headerCellRender} />
 
                 <Template name="actions" render={actionCellRender} />
-            
-                <Template name="phones.phone" render={phoneCellRender} />
             </DataGrid>
 
             <CreateContactModal opened={isModalCreateOpen} onSuccess={onModalSuccess} onClose={onModalClose} />
             <UpdateContactModal opened={isModalUpdateOpen} onSuccess={onModalSuccess} onClose={onModalClose} contactId={selectedId} />
+            <DeleteContactModal opened={isModalDeleteOpen} onSuccess={onModalSuccess} onClose={onModalClose} contactId={selectedId}/>
         </>
     )
 }

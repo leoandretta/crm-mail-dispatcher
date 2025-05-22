@@ -8,7 +8,8 @@ contactRouter.route('/dx')
 
 contactRouter.route('/:id')
     .get(ContactControllers.findById)
-    .put(ContactControllers.update);
+    .put(ContactControllers.update)
+    .delete(ContactControllers.delete);
 
 contactRouter.route('/')
     .get(ContactControllers.find)

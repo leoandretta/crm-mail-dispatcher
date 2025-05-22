@@ -19,14 +19,14 @@ export const contactsColumns: Column[] = [
         caption: "Empresa",
         dataField: "company.name",
         dataType: "string",
-        width: "40%",
+        width: "30%",
         alignment: "center",
     },
     { 
         caption: "Email",
         dataField: "email",
         dataType: "string",
-        width: "40%",
+        width: "30%",
         alignment: "center",
     },
     { 
@@ -35,6 +35,12 @@ export const contactsColumns: Column[] = [
         dataType: "string",
         width: "20%",
         alignment: "center",
+    },
+    { 
+        dataField: "active", 
+        dataType: "boolean", 
+        caption: "Ativo", 
+        visible: false
     },
     { 
         caption: "Ações",
@@ -48,4 +54,5 @@ export const contactsColumns: Column[] = [
         allowResizing: false,
         allowReordering: false,
     },
+    
 ]

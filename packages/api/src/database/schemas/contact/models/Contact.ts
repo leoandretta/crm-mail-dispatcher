@@ -14,6 +14,7 @@ class Contact extends Entity<
     declare phone: string;
     
     declare companyId: number;
+    declare active: boolean;
     
     declare company?: CompanyAttributes;
 
@@ -45,6 +46,11 @@ class Contact extends Entity<
                 companyId: {
                     type: DataTypes.INTEGER,
                     allowNull: false
+                },
+                active: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: true
                 },
                 createdAt: {
                     type: DataTypes.DATE,
