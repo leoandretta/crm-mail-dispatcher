@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { RichTextEditor, Link } from '@mantine/tiptap';
 import { useEditor} from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
@@ -13,17 +12,23 @@ import { getGreetings } from '@/utils/greetings';
 import SignatureJPG from "@images/signature.png";
 import classes from "./text-editor.module.css"
 import '@mantine/tiptap/styles.css'
+import { useRef } from 'react';
 
 interface TextEditorProps {
-    label?: string;
-    value: string;
-    onChange: (value: string) => void;
+    onChange: any;
+    value?: any;
+    defaultValue?: any;
+    checked?: any;
+    defaultChecked?: any;
+    error?: any;
+    onFocus?: any;
+    onBlur?: any;
 }
 
 
-const TextEditor = ({ value, onChange }: TextEditorProps) => {
-    const greetingsRef = useRef<HTMLParagraphElement | null>(null)
-    const signatureRef = useRef<HTMLParagraphElement | null>(null)
+const TextEditor = ({ value, onChange, onBlur, onFocus }: TextEditorProps) => {
+    const countRenderRef = useRef(0);
+    countRenderRef.current += 1;
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -34,9 +39,19 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
             Image
         ],
         content: value,
+        immediatelyRender: true,
+        shouldRerenderOnTransaction: false,
         onUpdate({ editor }) {
-            const message = editor.getHTML()
-            onChange(message);
+            const html = editor.getHTML()
+            onChange(html);
+        },
+        onBlur({ editor }) {
+            const html = editor.getHTML()
+            onBlur(html);
+        },
+        onFocus({ editor }) {
+            const html = editor.getHTML()
+            onFocus(html);
         },
     })
 
@@ -48,9 +63,10 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
     const Greeetings = () => {
         return (
             <Tooltip label="Preenchida automáticamente" position="bottom-end" >
-                <Text ref={greetingsRef} px={16} pt={16} className={classes.greetings} onClick={(e) => e.preventDefault()} onClickCapture={(e) => e.preventDefault()} >
+                <Text px={16} pt={16} className={classes.greetings} onClick={(e) => e.preventDefault()} onClickCapture={(e) => e.preventDefault()} >
                     {getGreetings()}&nbsp;
                     <Pill size="lg">[CONTATO]</Pill>,
+                    {countRenderRef.current}
                 </Text>
             </Tooltip>
         )
@@ -59,7 +75,7 @@ const TextEditor = ({ value, onChange }: TextEditorProps) => {
     const Signature = () => {
         return (
             <Tooltip label="Preenchida automáticamente" position="bottom-end" >
-                <Text ref={signatureRef} px={16} className={classes.signature}>
+                <Text px={16} className={classes.signature}>
                     Atenciosamente,<br />
                     <img src={SignatureJPG} width="400px" height="200px" />
                 </Text>

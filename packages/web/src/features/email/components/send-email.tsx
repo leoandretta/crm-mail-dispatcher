@@ -25,6 +25,7 @@ const SendEmailModal = (props: SendEmailModalProps) => {
 
     const formRef = useRef<HTMLFormElement>(null)
     const form = useForm<EmailPayloadValues>({
+        mode: "uncontrolled",
         initialValues: {
             to: [],
             subject: "",
@@ -74,6 +75,11 @@ const SendEmailModal = (props: SendEmailModalProps) => {
     const onSubmit = async (values: EmailPayloadValues) => {
         setLoading(true);
         try {
+            console.log(form.getInputProps(`files`));
+            
+            console.log(values);
+            
+            throw new Error("TESTE");
             const { success, message } = await sendEmail(values);
             if(!success) throw new Error(message);
 
@@ -147,8 +153,7 @@ const SendEmailModal = (props: SendEmailModalProps) => {
                         <Grid.Col span={12}>
                             <TextEditor
                             	key={form.key('message')}
-                            	value={form.getValues().message}
-                            	onChange={(v)=> form.setFieldValue('message', v)}
+                                {...form.getInputProps(`message`)}
                             />
                         </Grid.Col>
                     </Grid>
