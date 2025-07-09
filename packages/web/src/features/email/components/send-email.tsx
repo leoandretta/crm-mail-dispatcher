@@ -75,11 +75,6 @@ const SendEmailModal = (props: SendEmailModalProps) => {
     const onSubmit = async (values: EmailPayloadValues) => {
         setLoading(true);
         try {
-            console.log(form.getInputProps(`files`));
-            
-            console.log(values);
-            
-            throw new Error("TESTE");
             const { success, message } = await sendEmail(values);
             if(!success) throw new Error(message);
 
