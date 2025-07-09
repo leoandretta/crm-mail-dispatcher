@@ -3,12 +3,10 @@ import { MailerConfig } from "@/services/mail/interfaces";
 import { IJWTSecrets } from "./jwt";
 import { IPaths } from "./paths";
 import { IServerListenOptions } from "./server";
-
-export type IEnv = 'dev' | 'stg' | 'prd';
-
+import { ENV } from "./env";
 
 export interface IAppEnvConfig {
-    env: IEnv;
+    env: ENV;
     server: IServerListenOptions
     database: DatabaseConfig;
     mailer: MailerConfig;

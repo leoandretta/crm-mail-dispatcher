@@ -1,11 +1,12 @@
 import { MailerConfig } from "@/services/mail/interfaces";
 import { DatabaseConfig } from "../../database/interfaces";
-import { IEnv, IServerListenOptions } from "../interfaces";
+import { IServerListenOptions } from "../interfaces";
 import { IAppConfig } from "../interfaces/app-config";
 import { EnvConfig } from "./env-config";
 import dotenv from "dotenv";
 import { IJWTSecrets } from "../interfaces/jwt";
 import { IPaths } from "../interfaces/paths";
+import { ENV } from "../interfaces/env";
 
 export class _AppConfig implements IAppConfig
 {
@@ -13,19 +14,24 @@ export class _AppConfig implements IAppConfig
 
     constructor()
     {
-        const env = process.env.NODE_ENV!;
-        dotenv.config({ path: `.env.${env.toLowerCase()}`})
-
+        const env = EnvConfig.checkEnv();
         this._appEnv = new EnvConfig(env);
     }
 
-    get env(): IEnv {
+    get env(): ENV {
         return this._appEnv.env;
     }
 
     get server(): IServerListenOptions {
         return this._appEnv.server
     }
+
+    get serverAddr(): string {
+    const url = `${this._appEnv.server.hostname}:${this._appEnv.server.port}`;
+
+    if (this._appEnv.env == 'production') return 'https://' + url + '/api';
+    return 'http://' + url + '/api';
+  }
 
     get database(): DatabaseConfig {
         return this._appEnv.database
@@ -45,8 +51,8 @@ export class _AppConfig implements IAppConfig
 
     get escopo(): "Desenvolvimento" | "Homologação" | "Produção" {
         switch (this.env) {
-            case 'prd': return 'Produção';
-            case 'stg': return 'Homologação';
+            case 'production': return 'Produção';
+            case 'staging': return 'Homologação';
             default: return 'Desenvolvimento';
         }
     }

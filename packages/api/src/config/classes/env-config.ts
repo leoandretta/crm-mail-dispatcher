@@ -1,22 +1,37 @@
 import { Dialect } from "sequelize";
-import { IAppEnvConfig, IEnv } from "../interfaces";
+import { IAppEnvConfig } from "../interfaces";
 import path from "path"
+import { ENV } from "../interfaces/env";
+import { configDotenv } from "dotenv";
 
 export class EnvConfig
 {
     private config: IAppEnvConfig;
+    private static ALLOWED_ENVS: ENV[] = ['development', 'staging', 'production'];
 
-    constructor(env: IEnv)
+    constructor(env: ENV)
     {
         this.config = this.initialize(env);
     }
 
-    private initialize(env: IEnv): IAppEnvConfig {
+    static checkEnv(): ENV {
+        const envString = process.env.NODE_ENV;
+        if (!envString) throw new Error('NODE_ENV must be defined');
+
+        const env = this.ALLOWED_ENVS.find((el) => el == envString);
+        if (!env) throw new Error('Invalid NODE_ENV value');
+
+        configDotenv({ path: `.env.${env.toLowerCase()}` });
+
+        return env;
+    }
+    
+    private initialize(env: ENV): IAppEnvConfig {
         return {
             env,
             server: {
                 port: process.env.SERVER_PORT ? parseInt(process.env.SERVER_PORT) : 8000,
-                hostname: process.env.HOSTNAME ?? 'localhost'
+                hostname: process.env.SERVER_HOSTNAME ?? 'localhost'
             },
             database: {
                 uri: process.env.DB_URI,

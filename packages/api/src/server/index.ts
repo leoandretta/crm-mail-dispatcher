@@ -47,6 +47,7 @@ class Server implements IServer {
       
       this.server.listen(AppConfig.server, () => {
         const addressInfo = this.server.address();
+        console.log("🚀 ~ Server ~ this.server.listen ~ addressInfo:", addressInfo)
         if(typeof addressInfo === 'string')
         {
           console.log(`Sistema Atlas inicializado em ${this.server.address()?.toString()}`);
@@ -54,6 +55,8 @@ class Server implements IServer {
         else if(addressInfo)
           {
             const host = addressInfo.address === '::' ? (AppConfig.server.hostname ?? 'localhost') : addressInfo.address
+            console.log("🚀 ~ Server ~ this.server.listen ~ AppConfig.server:", AppConfig.server)
+            console.log("🚀 ~ Server ~ this.server.listen ~ host:", host)
             console.log(`Sistema Atlas inicializado em http://${host}:${addressInfo.port}`);
         }
         console.log(`Ambiente: ${AppConfig.escopo.toUpperCase()}`);
