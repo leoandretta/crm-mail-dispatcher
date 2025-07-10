@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
       "@crm-mail-dispatcher/shared/*": ["../shared/*"],
@@ -15,7 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "useUnknownInCatchVariables": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": false,
   },
   "extends": "../../tsconfig.json",
 }
