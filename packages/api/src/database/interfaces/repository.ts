@@ -1,7 +1,7 @@
 import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
-import { MakeNullishOptional } from "sequelize/lib/utils";
 import { BulkCreateOptions, CountOptions, CreateOptions, DestroyOptions, FindAndCountOptions, FindOptions, FindOrCreateOptions, UpdateOptions } from "sequelize";
 import { Entity } from "../classes";
+import { MakeNullishOptional } from "sequelize/types/utils";
 
 export interface IRepository<
     E extends Entity<A, C>, 

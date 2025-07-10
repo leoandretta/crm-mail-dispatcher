@@ -1,10 +1,9 @@
-import { FindOptions, FindOrCreateOptions, CreateOptions, BulkCreateOptions, UpdateOptions, DestroyOptions, CountOptions } from "sequelize";
-import { MakeNullishOptional } from "sequelize/lib/utils";
+import { FindOptions, FindOrCreateOptions, CreateOptions, BulkCreateOptions, UpdateOptions, DestroyOptions, CountOptions, FindAndCountOptions } from "sequelize";
 import { IRepository } from "../interfaces/repository";
 import { Entity } from "./entity";
 import {  CustomModelStatic } from "./model";
-import { FindAndCountOptions } from "sequelize/lib/model";
 import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { MakeNullishOptional } from "sequelize/types/utils";
 
 export abstract class BaseRepository<
     E extends Entity<A, C>,
