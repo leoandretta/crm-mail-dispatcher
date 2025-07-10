@@ -1,8 +1,8 @@
 import { DataTypes, literal, Sequelize } from "sequelize";
 import { Entity } from "@/database/classes";
 import { Company } from "@/database/models"
-import { ContactAttributes, ContactCreationAttributes } from "@crm-mail-dispatcher/shared/interfaces/contact";
-import { CompanyAttributes } from "@crm-mail-dispatcher/shared/interfaces/company";
+import { ContactAttributes, ContactCreationAttributes } from "@shared/interfaces/contact";
+import { CompanyAttributes } from "@shared/interfaces/company";
 
 class Contact extends Entity<
     ContactAttributes,

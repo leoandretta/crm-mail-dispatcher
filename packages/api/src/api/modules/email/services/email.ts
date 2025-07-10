@@ -1,7 +1,7 @@
 import { ContactRepository } from "@/database/schemas";
 import MailDispatch from "@/services/mail";
 import { DatabaseError } from "@/utils/exceptions";
-import { EmailPayloadValues } from "@crm-mail-dispatcher/shared/interfaces/email"
+import { EmailPayloadValues } from "@shared/interfaces/email"
 import { Attachment } from "nodemailer/lib/mailer";
 import { Op } from "sequelize";
 

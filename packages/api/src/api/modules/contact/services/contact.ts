@@ -6,7 +6,7 @@ import { ICRUDService } from "@/config/interfaces";
 import { Devextreme } from "@/services/devextreme";
 import { Contact } from "@/database/schemas/models";
 import { ContactRepository, CompanyRepository} from "@/database/schemas";
-import { ContactAttributes, ContactCreationAttributes, ContactUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/contact";
+import { ContactAttributes, ContactCreationAttributes, ContactUpdateAttributes } from "@shared/interfaces/contact";
 import { DatabaseError } from "@/utils/exceptions";
 
 class ContactServices implements ICRUDService<

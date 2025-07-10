@@ -1,5 +1,5 @@
 import { Entity } from "@/database/classes";
-import { UserAttributes, UserCreationAttributes } from "@crm-mail-dispatcher/shared/interfaces/user"
+import { UserAttributes, UserCreationAttributes } from "@shared/interfaces/user"
 import { DataTypes, Sequelize } from "sequelize";
 
 class User extends Entity<UserAttributes, UserCreationAttributes> implements UserAttributes

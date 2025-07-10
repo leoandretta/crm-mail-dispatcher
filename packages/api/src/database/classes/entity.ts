@@ -2,7 +2,7 @@ import { DataTypes, Sequelize } from "sequelize";
 import { CustomModel } from "./model";
 import { IModel } from "../interfaces/model";
 import { EntityOptions } from "../interfaces";
-import { EntityAttributes, EntityCreationAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { EntityAttributes, EntityCreationAttributes } from "@shared/interfaces/entity";
 
 export abstract class Entity<
     T extends EntityAttributes,

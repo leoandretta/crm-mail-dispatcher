@@ -1,4 +1,4 @@
-import { ContactAttributes } from "@crm-mail-dispatcher/shared/interfaces/contact";
+import { ContactAttributes } from "@shared/interfaces/contact";
 import { Attachment } from "nodemailer/lib/mailer";
 
 export interface MailerConfig {

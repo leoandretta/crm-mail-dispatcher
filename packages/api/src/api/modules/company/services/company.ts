@@ -2,7 +2,7 @@ import { FindOptions, CreateOptions, UpdateOptions, DestroyOptions } from "seque
 import { DatabaseError } from "@/utils/exceptions";
 import { ICRUDService } from "@/config/interfaces";
 import { Company, CompanyRepository } from "@/database/schemas";
-import { CompanyAttributes, CompanyCreationAttributes } from "@crm-mail-dispatcher/shared/interfaces/company";
+import { CompanyAttributes, CompanyCreationAttributes } from "@shared/interfaces/company";
 
 class CompanyServices implements ICRUDService<
     Company,

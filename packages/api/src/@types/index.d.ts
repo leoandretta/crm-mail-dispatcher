@@ -1,4 +1,4 @@
-import { AuthenticatedUser } from "@crm-mail-dispatcher/shared/interfaces/authentication";
+import { AuthenticatedUser } from "@shared/interfaces/authentication";
 import { Attachment } from "nodemailer/lib/mailer"
 
 declare global

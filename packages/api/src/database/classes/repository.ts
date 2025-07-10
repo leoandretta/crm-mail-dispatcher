@@ -2,7 +2,7 @@ import { FindOptions, FindOrCreateOptions, CreateOptions, BulkCreateOptions, Upd
 import { IRepository } from "../interfaces/repository";
 import { Entity } from "./entity";
 import {  CustomModelStatic } from "./model";
-import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@shared/interfaces/entity";
 import { MakeNullishOptional } from "sequelize/types/utils";
 
 export abstract class BaseRepository<

@@ -2,8 +2,8 @@ import { AppConfig } from "@/config";
 import AppDataSource from "@/database";
 import { UserRepository } from "@/database/schemas/auth/repositories";
 import { BadRequest, DatabaseError, Forbidden, NotFound, Unauthorized } from "@/utils/exceptions";
-import { AuthenticationPayloadValues, AuthUser } from "@crm-mail-dispatcher/shared/interfaces/authentication";
-import { UserAttributes, UserCreationAttributes } from "@crm-mail-dispatcher/shared/interfaces/user";
+import { AuthenticationPayloadValues, AuthUser } from "@shared/interfaces/authentication";
+import { UserAttributes, UserCreationAttributes } from "@shared/interfaces/user";
 import bcrypt from "bcrypt";
 import jwt, { TokenExpiredError } from "jsonwebtoken"
 class AuthServices 

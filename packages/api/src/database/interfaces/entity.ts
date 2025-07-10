@@ -1,5 +1,5 @@
 import { IndexesOptions, ModelAttributeColumnOptions } from "sequelize";
-import { EntityAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { EntityAttributes } from "@shared/interfaces/entity";
 
 // export type EntityAttributes = {
 //     id: number;

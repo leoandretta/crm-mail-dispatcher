@@ -1,6 +1,6 @@
 import { FindOptions, CreateOptions, UpdateOptions, DestroyOptions } from "sequelize";
 import { BaseRepository, Entity } from "../../database/classes";
-import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@shared/interfaces/entity";
 
 export interface ICRUDService<
     E extends Entity<T,C>,

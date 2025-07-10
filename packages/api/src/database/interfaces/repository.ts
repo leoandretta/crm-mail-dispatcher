@@ -1,4 +1,4 @@
-import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@crm-mail-dispatcher/shared/interfaces/entity";
+import { EntityAttributes, EntityCreationAttributes, EntityUpdateAttributes } from "@shared/interfaces/entity";
 import { BulkCreateOptions, CountOptions, CreateOptions, DestroyOptions, FindAndCountOptions, FindOptions, FindOrCreateOptions, UpdateOptions } from "sequelize";
 import { Entity } from "../classes";
 import { MakeNullishOptional } from "sequelize/types/utils";
