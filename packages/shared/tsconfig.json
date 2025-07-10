@@ -1,3 +1,11 @@
 {
+    "compilerOptions": {
+        "module": "commonjs",
+        "composite": true,
+        "outDir": "dist",
+        "rootDir": "src",
+        "strict": true,
+        "esModuleInterop": true,
+    },
     "extends": ["../../tsconfig.json"]
 }
