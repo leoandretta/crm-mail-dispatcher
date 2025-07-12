@@ -30,8 +30,8 @@ export class EnvConfig
         return {
             env,
             server: {
-                port: process.env.SERVER_PORT ? parseInt(process.env.SERVER_PORT) : 8000,
-                hostname: process.env.SERVER_HOSTNAME ?? 'localhost'
+                port: 4000,
+                hostname: 'localhost'
             },
             database: {
                 uri: process.env.DB_URI,
