@@ -8,6 +8,7 @@ import serverRoutes from "./router";
 import { errorHandler } from "@/middlewares/error-handler";
 import { unknownRoute } from "@/middlewares/unknown-route";
 import cookieParser from "cookie-parser";
+import { resolve } from "path";
 
 
 class Server implements IServer {
@@ -16,10 +17,10 @@ class Server implements IServer {
 
   constructor() {
     this.app = express();
-
+    
+    this.setStatic();
     this.setMiddlewares();
     this.setRoutes();
-    this.setStatic();
 
     this.server = createServer(this.app);
   }
@@ -38,7 +39,8 @@ class Server implements IServer {
   }
 
   setStatic(): void {
-    this.app.use(express.static('public'));
+    const staticPath = resolve(__dirname, '../public');
+    this.app.use("/static", express.static(staticPath));
   }
 
   async start(): Promise<void> {
