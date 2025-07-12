@@ -5,13 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "copy-public": "cpx \"src/public/**/*\" dist/public",
     "lint": "tsc --noEmit",
-    "build": "tsc && tsc-alias",
-    "dev": "set NODE_ENV=development&& tsx watch src/index.ts",
+    "build": "tsc && tsc-alias && yarn copy-public",
+    "dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
     "start:dev": "yarn dev",
     "start": "yarn start:dev",
-    "start:staging": "set NODE_ENV=staging&& node dist/index.js",
-    "start:prod": "set NODE_ENV=production&& node dist/index.js"
+    "start:staging": "cross-env NODE_ENV=staging node dist/index.js",
+    "start:prod": "cross-env NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -37,6 +38,8 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/multer": "^1.4.12",
     "@types/nodemailer": "^6.4.17",
+    "cpx": "^1.5.0",
+    "cross-env": "^7.0.3",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.20.3"
   }
