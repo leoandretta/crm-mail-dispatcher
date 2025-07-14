@@ -7,7 +7,7 @@ type APIResponseError = { success: false; }
 export type APIResponse<E> = { message: string; } & (APIResponseSuccess<E> | APIResponseError)
 
 export const api = axios.create({
-    baseURL: `${env.api}/api`,
+    baseURL: env.api,
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
 })

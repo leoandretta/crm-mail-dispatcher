@@ -5,7 +5,6 @@ import Icon from "@mdi/react";
 import { ActionButtonProps } from "../ui/button/action-button/interfaces";
 import { mdiAccount, mdiLogout } from "@mdi/js";
 import useAuth from "@/hooks/useAuth";
-import { env } from "@/config/env";
 
 type AppLayoutProps = {
     actions?: ActionButtonProps[];
@@ -17,7 +16,7 @@ const AppLayout = ({ actions, children}: AppLayoutProps) => {
         <div className={classes.wrapper}>
             <header>
                 <div className={classes.header_wrapper}>
-                    <img src={`${env.api}/static/images/logo.png`} height="70px"/>
+                    <img src={`/public/images/logo.png`} height="70px"/>
                     {
                         actions && actions.map(action => {
                             const ActionButton = () => (

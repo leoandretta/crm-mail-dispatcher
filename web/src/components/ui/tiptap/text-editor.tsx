@@ -13,7 +13,6 @@ import { getGreetings } from '@/utils/greetings';
 import classes from "./text-editor.module.css"
 import '@mantine/tiptap/styles.css'
 import { useRef } from 'react';
-import { env } from '@/config/env';
 
 interface TextEditorProps {
     onChange: any;
@@ -78,7 +77,7 @@ const TextEditor = ({ value, onChange, onBlur, onFocus }: TextEditorProps) => {
             <Tooltip label="Preenchida automáticamente" position="bottom-end" >
                 <Text px={16} className={classes.signature}>
                     Atenciosamente,<br />
-                    <img src={`${env.api}/static/images/signature.png`} width="400px" height="200px" />
+                    <img src={`/public/images/signature.png`} width="400px" height="200px" />
                 </Text>
             </Tooltip>
         )
