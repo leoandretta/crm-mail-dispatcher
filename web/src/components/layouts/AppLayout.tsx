@@ -5,6 +5,7 @@ import Icon from "@mdi/react";
 import { ActionButtonProps } from "../ui/button/action-button/interfaces";
 import { mdiAccount, mdiLogout } from "@mdi/js";
 import useAuth from "@/hooks/useAuth";
+import { env } from "@/config/env";
 
 type AppLayoutProps = {
     actions?: ActionButtonProps[];
@@ -16,13 +17,13 @@ const AppLayout = ({ actions, children}: AppLayoutProps) => {
         <div className={classes.wrapper}>
             <header>
                 <div className={classes.header_wrapper}>
-                    <img src={`/public/images/logo.png`} height="70px"/>
+                    <img src={`${env.static}/images/logo.png`} height="70px" width="auto" />
                     {
                         actions && actions.map(action => {
                             const ActionButton = () => (
                                 <Button variant="light" onClick={() => action.click && action.click()}>
                                     {
-                                        action.icon && <Icon path={action.icon} size="25" />
+                                        action.icon && <Icon path={action.icon} size={25} />
                                     }
                                     {action.label}
                                 </Button>
@@ -39,12 +40,12 @@ const AppLayout = ({ actions, children}: AppLayoutProps) => {
                         })
                     }
                     <Group>
-                        <Icon path={mdiAccount} size="30" color="darkblue" />
-                        <Title size="25" c="darkblue">
+                        <Icon path={mdiAccount} size={"30px"} color="darkblue" />
+                        <Title size={"25px"} c="darkblue">
                             { user?.name?.replace(/\s.+/, "") }
                         </Title>
                         <ActionIcon variant="transparent" onClick={logout} radius="xl">
-                            <Icon path={mdiLogout} size="30" color="gray" />
+                            <Icon path={mdiLogout} size={"30px"} color="gray" />
                         </ActionIcon>
                     </Group>
                 </div>

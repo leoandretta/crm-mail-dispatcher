@@ -62,7 +62,7 @@ const SendEmailModal = (props: SendEmailModalProps) => {
     const SendEmailButton = () => (
         <Button bg="teal" radius="md" onClick={openEmailModal}>
             <Group gap={5}>
-                <Icon path={mdiMail} size="20" />
+                <Icon path={mdiMail} size={"20px"} />
                 Novo Email
             </Group>
         </Button>
@@ -138,7 +138,7 @@ const SendEmailModal = (props: SendEmailModalProps) => {
                             <FileInput                            	
                                 label="Anexos"
                                 multiple
-                                leftSection={<Icon path={mdiAttachment} size="20" />}
+                                leftSection={<Icon path={mdiAttachment} size={"20px"} />}
                                 key={form.key(`files'`)}
                                 {...form.getInputProps(`files`)}
                             />

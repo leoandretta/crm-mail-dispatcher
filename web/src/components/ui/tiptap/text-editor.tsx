@@ -6,6 +6,7 @@ import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import { Pill, ScrollArea, Text, Tooltip } from '@mantine/core';
+import { env } from "@/config/env";
 
 import { getGreetings } from '@/utils/greetings';
 
@@ -77,7 +78,7 @@ const TextEditor = ({ value, onChange, onBlur, onFocus }: TextEditorProps) => {
             <Tooltip label="Preenchida automáticamente" position="bottom-end" >
                 <Text px={16} className={classes.signature}>
                     Atenciosamente,<br />
-                    <img src={`/public/images/signature.png`} width="400px" height="200px" />
+                    <img src={`${env.static}/images/signature.png`} width="400px" height="200px" />
                 </Text>
             </Tooltip>
         )

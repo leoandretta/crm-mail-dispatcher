@@ -1,5 +1,6 @@
 import { Component, PropsWithChildren, ReactNode } from "react";
 import classes from './AuthLayout.module.css'
+import { env } from "@/config/env";
 import { Title, Paper, Container } from "@mantine/core";
 
 type AuthLayoutProps = {
@@ -13,7 +14,7 @@ class AuthLayout extends Component<PropsWithChildren<AuthLayoutProps>>
         return (
             <div className={classes.wrapper}>
                 <Container fluid w="500px" className={classes.container}>
-                    <img src={`/public/images/logo.png`} width="200px" height="150px" style={{opacity: 0.7}} />
+                    <img src={`${env.static}/images/logo.png`} width="200px" height="150px" style={{opacity: 0.7}} />
                     <Title ta="center" my={30}>
                         MAIL DISPATCHER
                     </Title>

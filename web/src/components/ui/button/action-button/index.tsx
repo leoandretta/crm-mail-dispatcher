@@ -34,7 +34,7 @@ const ActionButton = (props: ActionButtonProps) => {
             w={props.width}
         >
             {
-                props.icon && <Icon path={props.icon} size="20" />
+                props.icon && <Icon path={props.icon} size={"20px"} />
             }
             { props.label }
         </Button>

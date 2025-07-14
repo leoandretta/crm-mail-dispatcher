@@ -67,7 +67,7 @@ const TableContact = () => {
     const CreateContactButton = () => (
         <Button radius="md" onClick={handleCreate}>
             <Group gap={5}>
-                <Icon path={mdiPlus} size="20" />
+                <Icon path={mdiPlus} size={"20px"} />
                 Cadastrar
             </Group>
         </Button>
@@ -86,12 +86,12 @@ const TableContact = () => {
             <Group >
                 <Tooltip key="delete-btn" label="Deletar contato" position="bottom">
                     <ActionIcon variant="light" color="red" radius="xl" onClick={() => handleDelete(data.data.id)} >
-                        <Icon path={mdiDelete} size="20" />
+                        <Icon path={mdiDelete} size={"20px"} />
                     </ActionIcon>
                 </Tooltip>
                 <Tooltip key="update-btn" label="Editar" position="bottom">
                     <ActionIcon variant="light" radius="xl" onClick={() => handleUpdate(data.data.id)} >
-                        <Icon path={mdiPencil} size="20" />
+                        <Icon path={mdiPencil} size={"20px"} />
                     </ActionIcon>
                 </Tooltip>
             </Group>

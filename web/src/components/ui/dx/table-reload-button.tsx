@@ -34,7 +34,7 @@ const TableReloadButton = ({ refTable }: TableReloadButtonProps) => {
             onClick={onClick}
         >
             <Group gap={5}>
-                <Icon path={mdiReload} size="20" />
+                <Icon path={mdiReload} size={"20px"} />
                 Recarregar
             </Group>
         </Button>

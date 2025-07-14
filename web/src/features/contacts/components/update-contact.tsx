@@ -111,7 +111,7 @@ const UpdateContactModal = ({ opened, onSuccess, onClose, contactId }: CreateCon
                         <TextInput                            	
                             label="Nome"
                             required
-                            leftSection={<Icon path={mdiAccount} size="20" />}
+                            leftSection={<Icon path={mdiAccount} size={"20px"} />}
                             key={form.key('name')}
                             {...form.getInputProps('name')}
                         />
@@ -120,7 +120,7 @@ const UpdateContactModal = ({ opened, onSuccess, onClose, contactId }: CreateCon
                         <TextInput                            	
                             label="Empresa"
                             required
-                            leftSection={<Icon path={mdiDomain} size="20" />}
+                            leftSection={<Icon path={mdiDomain} size={"20px"} />}
                             key={form.key('company_name')}
                             {...form.getInputProps('company_name')}
                         />
@@ -129,7 +129,7 @@ const UpdateContactModal = ({ opened, onSuccess, onClose, contactId }: CreateCon
                         <TextInput                            	
                             label="Email"
                             required
-                            leftSection={<Icon path={mdiAt} size="20" />}
+                            leftSection={<Icon path={mdiAt} size={"20px"} />}
                             key={form.key(`email'`)}
                             {...form.getInputProps(`email`)}
                         />
@@ -138,7 +138,7 @@ const UpdateContactModal = ({ opened, onSuccess, onClose, contactId }: CreateCon
                         <InputBase
                             label="Telefone"
                             required
-                            leftSection={<Icon path={mdiPhone} size="20" />}
+                            leftSection={<Icon path={mdiPhone} size={"20px"} />}
                             component={IMaskInput}
                             mask="(00) 00000-0000"
                             key={form.key(`phone'`)}
