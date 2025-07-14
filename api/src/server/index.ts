@@ -40,7 +40,7 @@ class Server implements IServer {
 
   setStatic(): void {
     const staticPath = resolve(__dirname, '../public');
-    this.app.use("/static", express.static(staticPath));
+    this.app.use("/public", express.static(staticPath));
   }
 
   async start(): Promise<void> {
