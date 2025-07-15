@@ -90,7 +90,7 @@ This is a Customer Relationship Management (CRM) system to help you manage custo
 ```
 5. Run the docker container
 ```
-  docker run --name crm-web -p 4000:4000 -d crm-web:latest
+  docker run --name crm-web -p 3000:80 -d crm-web:latest
 ```
 ---
 ### Running docker-compose
