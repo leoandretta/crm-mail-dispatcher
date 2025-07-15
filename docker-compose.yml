@@ -1,0 +1,22 @@
+services:
+  api:
+    build: ./api
+    container_name: crm-api
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
+
+  web:
+    build: ./web
+    container_name: crm-web
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
