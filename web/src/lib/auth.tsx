@@ -2,13 +2,17 @@ import { createContext, PropsWithChildren, ReactNode, useEffect, useState } from
 import { api } from "./api-client";
 
 type AuthContextValues = {
-    token: string | null,
-    setToken: (token: string | null) => void,
-    user: AuthUser | null,
-    setUser: (user: AuthUser | null) => void,
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+    token: string | null;
+    setToken: (token: string | null) => void;
+    user: AuthUser | null;
+    setUser: (user: AuthUser | null) => void;
 }
 
 const AuthContext = createContext<AuthContextValues>({
+    loading: false,
+    setLoading: () => {},
     token: null,
     setToken: () => {},
     user: null,
@@ -19,12 +23,14 @@ const AuthContext = createContext<AuthContextValues>({
 export const AuthProvider = ({ children }: PropsWithChildren): ReactNode => {
     const [token, setToken] = useState<string | null>(() => localStorage.getItem("accessToken"));
     const [user, setUser] = useState<AuthUser | null>(null);
-
+    const [loading, setLoading] = useState<boolean>(true);
+    
     useEffect(() => {
         const fetchUser = async () => {
             if (!token) {
                 localStorage.removeItem("accessToken");
                 setUser(null);
+                setLoading(false);
                 return;
             }
 
@@ -35,7 +41,6 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactNode => {
                     },
                     withCredentials: true
                 });
-                console.log("🚀 ~ fetchUser ~ res:", res)
                 localStorage.setItem("accessToken", token);
                 
                 setUser(res.data);
@@ -44,6 +49,9 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactNode => {
                 console.error("Failed to fetch user after token change", err);
                 setToken(null);
                 setUser(null);
+                localStorage.removeItem("accessToken");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -53,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactNode => {
 
   
     return (
-        <AuthContext.Provider value={{ token, setToken, user, setUser }}>
+        <AuthContext.Provider value={{ token, setToken, user, setUser, loading, setLoading }}>
             {children}
         </AuthContext.Provider>
     )

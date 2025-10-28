@@ -2,16 +2,20 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider, useLocation } fr
 import { LoginRoute } from "./routes/auth/login"
 import { ForgotPasswordRoute } from "./routes/auth/forgot-password";
 import { AppRoot } from "./routes/app";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { paths } from "@/config/paths";
 import NotFoundRoute from "./routes/not-found";
 import useAuth from "@/hooks/useAuth";
 
 export const ProtectedRoute = () => {
-  const { token, user } = useAuth();
+  const { token, user, loading } = useAuth();
   const location = useLocation()
+  
+  if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
 
-  if (!token && !user) {
+  const isAuthenticated = !!token && !!user;
+
+  if (!isAuthenticated) {
     return <Navigate to={paths.auth.login.path()} state={{ from: location }} replace />
   }
 
@@ -19,11 +23,19 @@ export const ProtectedRoute = () => {
 };
 
 export const PublicRoute = () => {
-  const { token, user } = useAuth();
+  const { token, user, loading } = useAuth();
   const location = useLocation()
 
-  if (token && user) {
+  if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
+
+  const isAuthenticated = !!token && !!user;
+  if (isAuthenticated) {
     return <Navigate to={paths.app.path()} state={{ from: location }} replace />;
+  }
+
+  const publicPaths = ["/login", "/esqueci-minha-senha"];
+  if(!publicPaths.includes(location.pathname)) {
+    return <Navigate to={paths.auth.login.path()} state={{ from: location }} replace />;
   }
 
   return <Outlet />;
@@ -35,6 +47,7 @@ const createAppRouter = () => createBrowserRouter([
         path: "",
         element: <PublicRoute />,
         children: [
+            { index: true, element: <Navigate to="/login" replace /> },
             { 
                 path: "/login", 
                 element: <LoginRoute />
@@ -50,7 +63,7 @@ const createAppRouter = () => createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
             {
-                path: "",
+                index: true,
                 element: <AppRoot />
             }
         ]
@@ -66,6 +79,12 @@ const createAppRouter = () => createBrowserRouter([
 const AppRouter = () => {
     const router = useMemo(() => createAppRouter(), [])
 
-    return <RouterProvider router={router} future={{ v7_startTransition: true }}/> 
+    return (
+    <Suspense
+      fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}
+    >
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    </Suspense>
+  );
 }
 export default AppRouter;

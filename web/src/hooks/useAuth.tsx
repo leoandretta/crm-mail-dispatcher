@@ -7,9 +7,10 @@ import { useContext } from "react";
 export const useAuthContext = () => useContext(AuthContext);
 
 const useAuth = () => {
-    const { token, setToken, user, setUser } = useAuthContext()
+    const { token, setToken, user, setUser, loading, setLoading } = useAuthContext()
 
     const fetchUser = async () => {
+        setLoading(true);
         try {
             const res = await api.get("/auth/me",{ 
                 withCredentials: true 
@@ -22,15 +23,17 @@ const useAuth = () => {
                 color: "red"
             })
             setUser(null);
+        } finally {
+            setLoading(false);
         }
     }
     
     const login = async (credentials: AuthenticationPayloadValues) => {
+        setLoading(true);
         try {
             const res = await api.post("/auth/login", credentials, { 
                 withCredentials: true 
             });
-            console.log("🚀 ~ login ~ res:", res)
             const accessToken = res.data.accessToken;
 
             localStorage.setItem("accessToken", accessToken);
@@ -48,10 +51,13 @@ const useAuth = () => {
                 })
             }
             setToken(null);
+        } finally {
+            setLoading(false);
         }
     };
 
     const refresh = async () => {
+        setLoading(true);
         try {
             const res = await api.get("/auth/refresh", { 
                 withCredentials: true 
@@ -72,10 +78,13 @@ const useAuth = () => {
             })
             setToken(null);
             return null;
+        } finally {
+            setLoading(false);
         }
     };
 
     const logout = async () => {
+        setLoading(true);
         try {
             await api.get("/auth/logout", {
                 withCredentials: true
@@ -90,10 +99,11 @@ const useAuth = () => {
             localStorage.removeItem("accessToken");
             setToken(null);
             setUser(null);
+            setLoading(false);
         }
     };
 
-    return { token, user, login, refresh, fetchUser, logout }
+    return { token, user, login, refresh, fetchUser, logout, loading }
 }
 
 export default useAuth;
