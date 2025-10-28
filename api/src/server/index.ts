@@ -29,7 +29,7 @@ class Server implements IServer {
     this.app.use(express.json({}));
     this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
     this.app.use(cookieParser())
-    this.app.use(serverCors);
+//    this.app.use(serverCors);
   }
 
   setRoutes(): void {
